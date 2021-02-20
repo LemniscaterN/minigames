@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <meta property="og:site_name" content="String(ストリング)　~オンラインを楽しむ~" />
+    <meta property="og:description" content="推奨人数:3人以上　1プレイ時間:10分程度" />
+    <meta property="og:type" content="website"/>
+    <meta name="twitter:card" content="summary" />
+
+    <script type="text/javascript" src="adno.js"></script>
+    <script type="text/javascript" src="topic.js"></script>
+    <link rel="stylesheet" type="text/css" href="string.css">
+    <title>String(ストリング)</title>
+  </head>
+  <body>
+    <div id="lapper">
+      <h2 class="center" id="number">貴方の数字「　0　」です</span></h2>
+      <h2 class="center" id="topic">お題 : ボタンを押してね！</span></h2>
+      <div id="buttonarea">
+        <h3 class="center">
+          <button id="SetNumber">SetNumber</button>
+          <button onclick="SetTopic()">NormalTopic</button>
+          <button onclick="SetRandomTopic()">RandomTopic</button>
+        </h3>
+      </div>
+      <div class="rulearea">
+        <div class="rule">
+          <h2 class="center">String(ストリング)</h2>
+          <ol>
+            <p class="center">推奨人数：3人以上　プレイ時間：1ゲーム10分程度<br>
+              このゲームは主に概要のように進みます。詳しいルール説明については【詳細】以降をご覧ください。<p>
+            <h4>概要</h4>
+            <li>自分の「点数」を決める。「点数」は他の人には言ってはいけない。</li>
+            <li>お題を決める。</li>
+            <li>お題に対して自分の「点数」があてはまりそうなものを考える。<br>
+                例）　お題：熱いもの　点数：89　→熱湯
+            </li>
+            <li>みんなで自分の考えたモノを発表し、点数が高いと思う順番に並び替える。<br>
+                例)　熱湯　>　真夏のアスファルト　>　アイス
+            </li>
+            <li>それぞれ自分の点数を発表し、数字の大きい順にならんでいたら成功です。</li>
+          </ol>
+
+          <ol>
+            <h4>詳細</h4>
+            <li>各プレイヤーは「SetNumber」を1回押して1-100の数字を一つ決めます。これが貴方の点数になります。</li>
+            <li>メンバーの誰かが「NormalTopic」か「RandomTopic」を押して今回のお題を決め、全員に共有します。</li>
+              <ul>
+                <li>NormalTopic : それっぽいお題です。50個程度あります。</li>
+                <li>RandomTopic : お題を自動生成します。意味不明なお題が表示されることもあるので要注意。</li>
+              </ul>
+            <li>お題に最も適したもの100点として、自分の点数に当てはまるものを考えてみましょう。<br>(つまり条件に自分が最も合うと思う言葉が100点、最も合わない言葉が1点となります)<li>
+            <p>例えばお題が「偉そうな人」の場合、以下のようになります。<br>例えば数字が「92」なら、僕のイメージはエジソンです。
+              <ul>
+                <li>100点：超絶偉そうな人</li>
+                <li>  1点：全く偉く無さそうな人</li>
+              </ul>
+            </p>
+
+            <li>それぞれが自分の点数だと思う言葉を発表し、話し合います。この時、自分の引いた点数を口にしてはいけません。
+              <br>その後、数字の小さい順（or大きい順）に公開出来れば成功です！</li>
+          </ol>
+
+
+          <h2 class="center">注意書き</h2>
+          <ul>
+            <li>ルールがわかりにくい場合は、大喜利お題メーカーとしてでもお使いくださいませ。</li>
+            <li>1人が制作時間3時間で作った雑ホームページなのでデザインとかはお許くださいませ。</li>
+          </ul>
+        </div>
+      </div>
+
+
+        <script type="text/javascript">
+          var number=document.getElementById("number");
+          SetNumber.addEventListener('click',function(){
+            var rand=Math.floor(Math.random()*100+1);
+            number.innerHTML="貴方の数字「　"+rand+"　」です";
+          });
+        </script>
+
+    </div>
+
+  </body>
+</html>

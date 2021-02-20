@@ -1,0 +1,33 @@
+body{
+  margin: 0;
+  padding: 0;
+  background: silver;
+}
+
+
+#header{
+  width: 100%;
+  height: 200px;;
+}
+
+#lapper{
+  margin: 0 auto;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  background: #FFFFCC;
+  border: solid 2px gray;
+  width: 80%;
+  height: 80%;
+}
+
+.center{
+  text-align:center;
+}
+.rulearea{
+  text-align: center;
+}
+
+.rule{
+  display: inline-block;
+  text-align: left;
+}
