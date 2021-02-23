@@ -14,5 +14,5 @@
   熱湯(89)、真夏のアスファルト(90)、アイス(10)→予想した順と異なるので失敗  
 
 ## [Mackerel（マカレル）](https://lemniscatern.github.io/minigames/mackerel/)
-年齢に関する悩みをMackerel仙人が一刀両断してくださいます。
+年齢に関するお悩みをMackerel仙人が一刀両断してくださいます。
 
