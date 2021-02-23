@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta property="og:site_name" content="Mackerel"/>
+        <meta property="og:description" content="いつまでも若くありあたい貴方へ。" />
+        <meta property="og:image" contenmkdirt="" />
+        <meta property="og:type" content="website"/>
+        <meta name="twitter:card" content="summary" />
+
+
+        <link rel="icon" href="img/hermit-icon.png">
+        <link rel="icon" type="image/png" href="img/hermit-icon.png">
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <title>Mackerel</title>
+    </head>
+    <body>
+        <main>
+            <div class="d-flex justify-content-center align-items-center">
+                    <img class="" src="img/hermit-icon.png" alt="仙人">
+                    <div class="align-mid hermit-font mt-4" id="scene1">
+                        <p class="mt">私は世界の<ruby> <rb>釁隙</rb> <rp>(</rp> <rt>きんげき</rt><rp>)</rp></ruby>を生きる<ruby><rb>僊</rb><rp>(</rp><rt>せんにん</rt><rp>)</rp></ruby>である。</p>
+                        <p>そなたの様相からは隠すことの出来ない憂を見てとれる。</p>
+                        <p>ふむふむ。自身の年齢について悩みがあると。</p>
+                        <p>そなたは<textarea  id="year_birth" class="my-textarea" cols="4" rows="1" placeholder="2000"></textarea>年<textarea  id="month_birth" class="my-textarea" cols="2" rows="1" placeholder="1"></textarea>月生まれだが、</p>
+                        <p>いつまでも<textarea  id="ideal_age" class="my-textarea" placeholder="16" cols="3" rows="1"></textarea>歳でありたい、と。</p>
+                        <div class="text-center">
+                            <button class="" id="yes" style="border-style:outset; border-radius: 3px;" onclick="yesbutton()">はい</button>
+                        </div>
+                    </div>
+                    <div class="align-mid hermit-font d-none justify-content-end mt-4" id="scene2">
+                        <p>ならば、私の力でそなたのそなたの理想の年齢にしてやろう。</p>
+                        <p>そなたはこれより</p>
+                        <div class="d-flex align-items-end mb-2" style="position:relative;">
+                            <img src="img/cloud.png" alt="" id="cloud" onclick="animation_start()">
+                            <div style="width: 100px;" class="text-center">
+                                <h1 class="mb-0" id="disp_age"></h1>
+                            </div>
+                            <div style="width: 100px;" class="text-center">
+                                <p class="small mb-0" id="disp_month"></p>
+                            </div>
+                            <h1 class="mb-0">じゃ。</h1>
+                        </div>
+                        <p class="small mb-0" id="advice"></p>
+                        <p>また、何かあればいつでもここを訪れるがよい。</p>
+                        <div class="text-center">
+                            <button class="" id="yes" style="border-style:outset; border-radius: 3px;" onclick="changeage()">やっぱり年齢を変えたい</button>
+                        </div>
+                    </div>
+            </div>
+        </main>
+
+    </body>
+</html>
+
+<style>
+.my-textarea{
+    text-align: center;
+    resize: none;
+    vertical-align:bottom;
+    padding: 0px;
+}
+
+img{
+    max-height: 200px;
+    vertical-align:middle;
+}
+
+.hermit-font{
+    font-family: 'Shippori Mincho', serif;
+}
+
+@keyframes cloud-moving {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        width:20px;
+        height: auto;
+        transform: translateY(-50px) translateX(100px) rotate(-30deg);
+        opacity: 0;
+    }
+}
+
+#cloud{    
+    animation-name:cloud-moving;
+    animation-duration: 7s;
+    /* 動的に変更 */
+    animation-delay:4s;
+    animation-fill-mode:forwards;
+    width: 115px;
+    height: auto;
+    position: absolute;
+    top:  -20px;                  
+    bottom:  0;               
+    left:  85px; 
+    margin:  auto; 
+}
+
+</style>
+
+
+<script>
+
+const dateNow = new Date();
+
+function yesbutton(){
+    const year_birth = document.getElementById('year_birth').value;
+    const month_birth = document.getElementById('month_birth').value;
+    const ideal_age = document.getElementById('ideal_age').value;
+    const isyear = /^[1-2][0-9]{3}$/.test(year_birth);//1000-2999まで。
+    const ismonth = /^([1-9]|1[0-2])$/.test(month_birth);//1-12まで
+    const isage = /^(0|[1-9][0-9]{0,2})$/.test(ideal_age);//0-999
+    if(isyear===true && ismonth===true && isage===true){
+        const year = Number(year_birth);
+        const month = Number(month_birth); 
+        const day=1;
+        const iage = Number(ideal_age);
+        const ar = getDays(year,month,day);
+        const disp_year = ideal_age;
+        const disp_month = (ar[0]-iage)*12+ar[1];
+        document.getElementById("disp_age").innerHTML=disp_year+"歳";
+        if(disp_month>=0)document.getElementById("disp_month").innerHTML="と"+disp_month+"ヶ月";
+        else document.getElementById("disp_month").innerHTML="まで"+-disp_month+"ヶ月";
+        if(disp_month==0)document.getElementById("advice").innerHTML="胸を張って答えるのじゃ。";
+        else if(dateNow.getTime() - new Date(year,month,1)<0)document.getElementById("advice").innerHTML="未来で会えることを楽しみにしておるぞ。";
+        else if(0<disp_month && disp_month<24)document.getElementById("advice").innerHTML="そのくらいなら言ったもん勝ちな気もするがの。";
+        else if(disp_month>360)document.getElementById("advice").innerHTML="ちなみに、「Mackeral」は鯖という意味じゃぞ。";
+        else if(disp_month<-360)document.getElementById("advice").innerHTML="ふと気が付いたらそのくらいの年になっとるぞ。";
+        else if(disp_year>700)document.getElementById("advice").innerHTML="・・・そんなに長生きしても暇じゃなかろうか。";
+        else document.getElementById("advice").innerHTML="";
+        document.getElementById("scene1").classList.add("d-none");
+        document.getElementById("scene2").classList.remove("d-none");
+        document.getElementById("scene2").classList.add("d-inline");
+        document.getElementById("cloud").style.animationDelay = "4s";
+
+    }else{
+        console.log(ideal_age+":"+isage);
+        console.log(year_birth+":"+isyear);
+        console.log(month_birth+":"+ismonth);
+    }    
+}
+
+function getDays(bYear, bMonth, bDay){
+  const dateBirth = new Date(bYear, bMonth-1, bDay);
+  const timeTillNow = dateNow.getTime() - dateBirth.getTime(); //ミリ秒
+  const daysTillNow = timeTillNow / (1000 * 3600 * 24); //日数
+  const DAYS_PER_MONTH = 365 / 12;
+  const ageY = Math.floor(daysTillNow / 365);//歳
+  const ageM = Math.floor((daysTillNow- 365*ageY) /DAYS_PER_MONTH);//日数
+  
+  return [ageY,ageM];
+}
+
+function changeage(){
+    document.getElementById("scene1").classList.remove("d-none");
+    document.getElementById("scene1").classList.add("d-inline");
+    document.getElementById("scene2").classList.add("d-none");
+}
+
+function animation_start(){
+    document.getElementById("cloud").style.animationDelay = "0s";
+}
+
+
+
+</script>
