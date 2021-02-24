@@ -26,8 +26,8 @@
     </head>
     <body>
         <main>
-            <div class="d-flex justify-content-center align-items-center">
-                    <img class="" src="img/hermit-icon.png" alt="仙人">
+            <div class="d-sm-flex justify-content-center align-items-center">
+                    <img  id="hermit" class="" src="img/hermit-icon.png" alt="仙人" style="@media screen (max-width:767px){background-color:red;}">
                     <div class="align-mid hermit-font mt-4" id="scene1">
                         <p class="mt">私は世界の<ruby> <rb>釁隙</rb> <rp>(</rp> <rt>きんげき</rt><rp>)</rp></ruby>を生きる<ruby><rb>僊</rb><rp>(</rp><rt>せんにん</rt><rp>)</rp></ruby>である。</p>
                         <p>そなたの様相からは隠すことの出来ない憂を見てとれる。</p>
@@ -105,6 +105,22 @@ img{
     bottom:  0;               
     left:  85px; 
     margin:  auto; 
+}
+
+@media screen and (max-width:575px) { 
+    /*　画面サイズが480pxからはここを読み込む　*/
+    #hermit{
+        display: block;
+        margin-top: 10px;;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100px;
+        
+    }
+    #scene1,#scene2{
+        text-align:center;        
+    }
+
 }
 
 </style>
