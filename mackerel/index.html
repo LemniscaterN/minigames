@@ -32,8 +32,8 @@
                         <p class="mt">私は世界の<ruby> <rb>釁隙</rb> <rp>(</rp> <rt>きんげき</rt><rp>)</rp></ruby>を生きる<ruby><rb>僊</rb><rp>(</rp><rt>せんにん</rt><rp>)</rp></ruby>である。</p>
                         <p>そなたの様相からは隠すことの出来ない憂を見てとれる。</p>
                         <p>ふむふむ。自身の年齢について悩みがあると。</p>
-                        <p>そなたは<textarea  id="year_birth" class="my-textarea" cols="4" rows="1" >2000</textarea>年<textarea  id="month_birth" class="my-textarea" cols="2" rows="1">6</textarea>月生まれだが、</p>
-                        <p>いつまでも<textarea  id="ideal_age" class="my-textarea" cols="3" rows="1">10</textarea>歳でありたい、と。</p>
+                        <p>そなたは<textarea  id="year_birth" class="my-textarea" placeholder="2000" cols="4" rows="1" ></textarea>年<textarea  id="month_birth" class="my-textarea" placeholder="6" cols="2" rows="1"></textarea>月生まれだが、</p>
+                        <p>いつまでも<textarea  id="ideal_age" class="my-textarea" placeholder="16" cols="3" rows="1"></textarea>歳でありたい、と。</p>
                         <div class="text-center">
                             <button class="" id="yes" style="border-style:outset; border-radius: 3px;" onclick="yesbutton()">はい</button>
                         </div>
@@ -115,12 +115,10 @@ img{
         margin-left: auto;
         margin-right: auto;
         max-width: 100px;
-        
     }
     #scene1,#scene2{
         text-align:center;        
     }
-
 }
 
 </style>
@@ -131,13 +129,34 @@ img{
 const dateNow = new Date();
 
 function yesbutton(){
+    const isyear = /^[1-2][0-9]{3}$/.test(document.getElementById('year_birth').value);//1000-2999まで。
+    const ismonth = /^([1-9]|1[0-2])$/.test(document.getElementById('month_birth').value);//1-12まで
+    const isage = /^(0|[1-9][0-9]{0,2})$/.test(document.getElementById('ideal_age').value);//0-999
+    let ok=(isyear===true && ismonth===true && isage===true);
+
+    let isautoset=false;
+    if(isyear===false){
+        document.getElementById("year_birth").value="2000";
+        isautoset=true;
+    }
+    if(ismonth===false){
+        document.getElementById("month_birth").value="6";
+        isautoset=true;
+    }
+    if(isage===false){
+        document.getElementById("ideal_age").value="16";
+        isautoset=true;
+    }
+    if(isautoset==true){
+        const sentence = "其方は「"+document.getElementById('year_birth').value+"年"+document.getElementById('month_birth').value+"月生まれだが"+document.getElementById("ideal_age").value+"歳でいたい」と思っている様に感じたのじゃが、あっておるかの？";
+        ok=window.confirm(sentence);
+    }
+
     const year_birth = document.getElementById('year_birth').value;
     const month_birth = document.getElementById('month_birth').value;
     const ideal_age = document.getElementById('ideal_age').value;
-    const isyear = /^[1-2][0-9]{3}$/.test(year_birth);//1000-2999まで。
-    const ismonth = /^([1-9]|1[0-2])$/.test(month_birth);//1-12まで
-    const isage = /^(0|[1-9][0-9]{0,2})$/.test(ideal_age);//0-999
-    if(isyear===true && ismonth===true && isage===true){
+        
+    if(ok){
         const year = Number(year_birth);
         const month = Number(month_birth); 
         const day=1;
@@ -159,12 +178,17 @@ function yesbutton(){
         document.getElementById("scene2").classList.remove("d-none");
         document.getElementById("scene2").classList.add("d-inline");
         document.getElementById("cloud").style.animationDelay = "4s";
-
     }else{
-        console.log(ideal_age+":"+isage);
-        console.log(year_birth+":"+isyear);
-        console.log(month_birth+":"+ismonth);
-    }    
+
+
+
+
+    }
+    // else{
+    //     console.log(ideal_age+":"+isage);
+    //     console.log(year_birth+":"+isyear);
+    //     console.log(month_birth+":"+ismonth);
+    // }    
 }
 
 function getDays(bYear, bMonth, bDay){
